@@ -6,7 +6,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
 import org.controlsfx.control.SearchableComboBox;
 
 import java.net.URL;
@@ -15,6 +17,8 @@ import java.util.ResourceBundle;
 
 public class ProximityMainController implements Initializable {
 
+    @FXML
+    public TextArea selectedCardParameters;
     @FXML
     private SearchableComboBox availableCardsList;
     private ArrayList<String> allCardNames;
@@ -42,7 +46,12 @@ public class ProximityMainController implements Initializable {
         allCardNames.add("Forest");
         allCardNames.add("Mana Crypt");
         fillAllCardsList();
+        setupSelectedParameters();
 
+    }
+
+    private void setupSelectedParameters() {
+        selectedCardParameters.setStyle("");
     }
 
     /***

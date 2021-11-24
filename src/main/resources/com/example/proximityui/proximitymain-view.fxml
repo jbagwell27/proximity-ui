@@ -6,6 +6,8 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.*?>
 <?import org.controlsfx.control.SearchableComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
 <VBox xmlns:fx="http://javafx.com/fxml" spacing="5.0"
       fx:controller="com.example.proximityui.ProximityMainController">
     <padding>
@@ -68,6 +70,30 @@
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
             </GridPane.margin>
         </ListView>
+
+        <TextArea
+        fx:id="selectedCardParameters"
+        wrapText="true"
+        minWidth="100"
+        GridPane.columnIndex="2" GridPane.rowIndex="1"
+        GridPane.valignment="TOP"
+        text="Hello from Text Area"
+        editable="false">
+            <GridPane.margin>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+            </GridPane.margin>
+        </TextArea>
+<!--        <TextField-->
+<!--            fx:id="selectedCardParameters"-->
+<!--            GridPane.columnIndex="2" GridPane.rowIndex="1"-->
+<!--            GridPane.rowSpan="2"-->
+<!--            minWidth="100"-->
+<!--            GridPane.valignment="TOP"-->
+<!--        text="Hello From Label">-->
+<!--            <GridPane.margin>-->
+<!--                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>-->
+<!--            </GridPane.margin>-->
+<!--        </TextField>-->
 
     </GridPane>
 
