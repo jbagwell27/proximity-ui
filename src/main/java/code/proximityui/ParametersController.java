@@ -1,4 +1,4 @@
-package com.example.proximityui;
+package code.proximityui;
 
 public class ParametersController {
 }

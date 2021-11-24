@@ -10,6 +10,6 @@ module com.example.proximityui {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
 
-    opens com.example.proximityui to javafx.fxml;
-    exports com.example.proximityui;
+    opens code.proximityui to javafx.fxml;
+    exports code.proximityui;
 }

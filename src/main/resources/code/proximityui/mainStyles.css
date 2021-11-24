@@ -1,0 +1,16 @@
+#selectedCardParameters {
+    -fx-background-insets: 0;
+    -fx-background-color: transparent, white, transparent, white;
+}
+#selectedCardParameters .content {
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+#selectedCardParameters:focused .content{
+-fx-background-color: transparent, white, transparent, white;
+}
+
+#selectedCardParameters:focused {
+ -fx-highlight-fill: #7ecfff;
+}
+

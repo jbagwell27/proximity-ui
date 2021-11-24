@@ -1,4 +1,4 @@
-package com.example.proximityui.data;
+package code.proximityui.data;
 
 public class Card {
 

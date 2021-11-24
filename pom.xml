@@ -112,7 +112,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.proximityui/com.example.proximityui.ProximityUIApplication</mainClass>
+                            <mainClass>com.example.proximityui/code.proximityui.ProximityUIApplication</mainClass>
                         </configuration>
                     </execution>
                 </executions>

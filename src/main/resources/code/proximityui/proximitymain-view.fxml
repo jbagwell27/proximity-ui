@@ -8,8 +8,12 @@
 <?import org.controlsfx.control.SearchableComboBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TextArea?>
+<?import java.net.URL?>
 <VBox xmlns:fx="http://javafx.com/fxml" spacing="5.0"
-      fx:controller="com.example.proximityui.ProximityMainController">
+      fx:controller="code.proximityui.ProximityMainController">
+    <stylesheets>
+        <URL value="@mainStyles.css"/>
+    </stylesheets>
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>

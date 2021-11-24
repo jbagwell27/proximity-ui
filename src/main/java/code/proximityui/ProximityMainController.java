@@ -1,6 +1,6 @@
-package com.example.proximityui;
+package code.proximityui;
 
-import com.example.proximityui.data.Card;
+import code.proximityui.data.Card;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,7 +8,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
 import org.controlsfx.control.SearchableComboBox;
 
 import java.net.URL;
