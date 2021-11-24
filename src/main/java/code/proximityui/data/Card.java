@@ -8,6 +8,7 @@ public class Card {
     private Parameters parameters;
 
     public Card() {
+        parameters = new Parameters();
     }
 
     public Card(String name) {

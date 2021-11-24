@@ -12,7 +12,7 @@ public class ProximityUIApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ProximityUIApplication.class.getResource("proximitymain-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 640, 360);
-        stage.setTitle("Hello!");
+        stage.setTitle("Proximity UI");
         stage.setScene(scene);
         stage.show();
     }

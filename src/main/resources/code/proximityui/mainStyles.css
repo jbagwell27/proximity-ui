@@ -1,16 +1,25 @@
-#selectedCardParameters {
+@font-face {
+    font-family: Beleren2016;
+    src: url('file:src/main/resources/fonts/Beleren2016-Bold.ttf');
+}
+
+#cardSelectedParameters {
     -fx-background-insets: 0;
-    -fx-background-color: transparent, white, transparent, white;
+    -fx-background-color: transparent;
 }
-#selectedCardParameters .content {
-    -fx-background-color: transparent, white, transparent, white;
-}
-
-#selectedCardParameters:focused .content{
--fx-background-color: transparent, white, transparent, white;
+#cardSelectedParameters .content {
+    -fx-background-color: transparent;
 }
 
-#selectedCardParameters:focused {
+#cardSelectedParameters:focused .content{
+-fx-background-color: transparent;
+}
+
+#cardSelectedParameters:focused {
  -fx-highlight-fill: #7ecfff;
 }
 
+#cardname .text {
+    -fx-font-family: "Beleren2016";
+    -fx-font-size: 24px;
+}
