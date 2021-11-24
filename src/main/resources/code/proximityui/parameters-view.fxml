@@ -1,26 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.*?>
 <?import java.net.URL?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml"
-            xmlns="http://javafx.com/javafx"
-            fx:controller="code.proximityui.ParametersController"
-            prefHeight="400.0" prefWidth="600.0">
+<VBox xmlns:fx="http://javafx.com/fxml"
+      xmlns="http://javafx.com/javafx"
+      fx:controller="code.proximityui.ParametersController"
+      prefHeight="400.0" prefWidth="600.0">
+
     <stylesheets>
         <URL value="@mainStyles.css"/>
     </stylesheets>
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
 
     <Label
             fx:id="cardname">
+        <padding>
+            <Insets top="10" bottom="30" left="10"/>
+        </padding>
     </Label>
 
     <GridPane
             fx:id="rootParamGrid">
+        <CheckBox
+                fx:id="useOfficialArtChkBox"
+                text="use__official__art"
+                GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <CheckBox
+                fx:id="reminderTextChkBox"
+                text="reminder__text"
+                GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <GridPane
+                fx:id="threadSpinnerGrid"
+                GridPane.columnIndex="0" GridPane.rowIndex="2">
 
+
+            <Label
+                    text="threads"
+                    GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+        </GridPane>
 
     </GridPane>
 
 
-</AnchorPane>
+</VBox>

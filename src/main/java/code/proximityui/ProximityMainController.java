@@ -24,14 +24,10 @@ import java.util.ResourceBundle;
 
 public class ProximityMainController implements Initializable {
 
-    @FXML
     public TextArea cardSelectedParameters;
-    @FXML
     public GridPane rootGrid;
-    @FXML
     public ListView cardSelectedListView;
-    @FXML
-    private SearchableComboBox cardAvailableComboBox;
+    public SearchableComboBox cardAvailableComboBox;
 
     private ArrayList<String> cardAvailableNames;
     private ArrayList<Card> cardSelectedArrayList;

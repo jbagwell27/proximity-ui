@@ -2,21 +2,25 @@ package code.proximityui.data;
 
 public class Parameters {
 
-    private boolean use_official_art = false;
-    private boolean reminder_text = false;
-    private boolean debug = false;
-    private int threads = 10;
-    private String border = "black";
-    private boolean artist_outline = false;
-    private boolean copyright = true;
+    private boolean use_official_art;
+    private boolean reminder_text;
+    private int threads;
+    private String border;
+    private boolean artist_outline;
+    private boolean copyright;
 
     public Parameters() {
+        use_official_art = false;
+        reminder_text = false;
+        threads = 10;
+        border = "black";
+        artist_outline = false;
+        copyright = true;
     }
 
-    public Parameters(boolean use_official_art, boolean reminder_text, boolean debug, int threads, String border, boolean artist_outline, boolean copyright) {
+    public Parameters(boolean use_official_art, boolean reminder_text, int threads, String border, boolean artist_outline, boolean copyright) {
         this.use_official_art = use_official_art;
         this.reminder_text = reminder_text;
-        this.debug = debug;
         this.threads = threads;
         this.border = border;
         this.artist_outline = artist_outline;
@@ -39,13 +43,6 @@ public class Parameters {
         this.reminder_text = reminder_text;
     }
 
-    public boolean isDebug() {
-        return debug;
-    }
-
-    public void setDebug(boolean debug) {
-        this.debug = debug;
-    }
 
     public int getThreads() {
         return threads;
