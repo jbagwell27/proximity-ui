@@ -75,4 +75,14 @@ public class Parameters {
     public void setCopyright(boolean copyright) {
         this.copyright = copyright;
     }
+
+    @Override
+    public String toString() {
+        return  "--use_official_art=" + use_official_art +
+                " --reminder_text=" + reminder_text +
+                " --threads=" + threads +
+                " --border=" + border +
+                " --artist_outline=" + artist_outline +
+                " --copyright=" + copyright;
+    }
 }

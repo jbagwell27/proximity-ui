@@ -30,12 +30,14 @@ public class ParametersController implements Initializable {
 
     private void update() {
         cardname.setText(card.getName());
+        setCurrentValues();
         setupSpinner();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setGridLayout();
+
     }
 
     private void setGridLayout() {
@@ -51,17 +53,30 @@ public class ParametersController implements Initializable {
         rootParamGrid.setVgap(10);
     }
 
-    public void setupSpinner(){
+    private void setCurrentValues() {
+        if (!card.getParameters().isUse_official_art())
+            useOfficialArtChkBox.setIndeterminate(true);
+        if (!card.getParameters().isReminder_text())
+            reminderTextChkBox.setIndeterminate(true);
+
+        reminderTextChkBox.setSelected(card.getParameters().isReminder_text());
+        useOfficialArtChkBox.setSelected(card.getParameters().isUse_official_art());
+    }
+
+    public void setupSpinner() {
         ColumnConstraints c = new ColumnConstraints();
         ColumnConstraints c1 = new ColumnConstraints();
         c.setPercentWidth(25);
         c1.setPercentWidth(25);
         threadSpinnerGrid.getColumnConstraints().add(c);
         threadSpinnerGrid.getColumnConstraints().add(c1);
+        threadSpinnerGrid.setHgap(5);
+        threadSpinnerGrid.setVgap(5);
         Spinner<Integer> threadSpinner = new Spinner<>();
-        threadSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,50,card.getParameters().getThreads(),1));
-        threadSpinner.setMaxWidth(55);
-        threadSpinnerGrid.add(threadSpinner,0,0);
+        threadSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 50, card.getParameters().getThreads(), 1));
+        threadSpinner.setMaxWidth(75);
+        threadSpinnerGrid.add(threadSpinner, 0, 0);
+
     }
 
 
