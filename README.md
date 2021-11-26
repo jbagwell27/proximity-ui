@@ -1,6 +1,6 @@
 # proximity-ui
 
-UI sample for the Proximity program by HavenKing  
+UI sample for [Proximity by HavenKing  ](https://github.com/Proximity-Engine)
 
 ## Requirements
 
