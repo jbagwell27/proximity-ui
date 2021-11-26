@@ -76,6 +76,7 @@ public class ParametersController implements Initializable {
         threadSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 50, card.getParameters().getThreads(), 1));
         threadSpinner.setMaxWidth(75);
         threadSpinnerGrid.add(threadSpinner, 0, 0);
+
     }
 
 
