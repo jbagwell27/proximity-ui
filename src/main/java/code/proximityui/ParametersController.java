@@ -2,11 +2,9 @@ package code.proximityui;
 
 import code.proximityui.data.Card;
 import code.proximityui.data.Parameters;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 
@@ -20,16 +18,20 @@ public class ParametersController implements Initializable {
     public CheckBox useOfficialArtChkBox;
     public GridPane threadSpinnerGrid;
     public CheckBox reminderTextChkBox;
-    private Card card;
-    private Parameters parameters;
+    public Button submitButton;
+    private ProximityModel model;
+    public Spinner<Integer> threadSpinner;
 
-    public void setCardInformation(Card c) {
-        card = c;
+    public void setModel(ProximityModel model) {
+        this.model = model;
         update();
+    }
+    public ProximityModel getModel(){
+        return this.model;
     }
 
     private void update() {
-        cardname.setText(card.getName());
+        cardname.setText(model.getCurrentCard().getName());
         setCurrentValues();
         setupSpinner();
     }
@@ -54,13 +56,13 @@ public class ParametersController implements Initializable {
     }
 
     private void setCurrentValues() {
-        if (!card.getParameters().isUse_official_art())
+        if (!model.getCurrentCard().getParameters().isUse_official_art())
             useOfficialArtChkBox.setIndeterminate(true);
-        if (!card.getParameters().isReminder_text())
+        if (!model.getCurrentCard().getParameters().isReminder_text())
             reminderTextChkBox.setIndeterminate(true);
 
-        reminderTextChkBox.setSelected(card.getParameters().isReminder_text());
-        useOfficialArtChkBox.setSelected(card.getParameters().isUse_official_art());
+        useOfficialArtChkBox.setSelected(model.getCurrentCard().getParameters().isUse_official_art());
+        reminderTextChkBox.setSelected(model.getCurrentCard().getParameters().isReminder_text());
     }
 
     public void setupSpinner() {
@@ -72,12 +74,21 @@ public class ParametersController implements Initializable {
         threadSpinnerGrid.getColumnConstraints().add(c1);
         threadSpinnerGrid.setHgap(5);
         threadSpinnerGrid.setVgap(5);
-        Spinner<Integer> threadSpinner = new Spinner<>();
-        threadSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 50, card.getParameters().getThreads(), 1));
+        threadSpinner = new Spinner<>();
+        threadSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 50, model.getCurrentCard().getParameters().getThreads(), 1));
         threadSpinner.setMaxWidth(75);
         threadSpinnerGrid.add(threadSpinner, 0, 0);
 
     }
 
 
+    public void onSubmitButtonClick(ActionEvent actionEvent) {
+        model.getCurrentCard().getParameters().setUse_official_art(useOfficialArtChkBox.isSelected());
+        model.getCurrentCard().getParameters().setReminder_text(reminderTextChkBox.isSelected());
+        model.getCurrentCard().getParameters().setThreads(threadSpinner.getValue());
+        model.updateSelectedCard();
+
+        submitButton.getScene().getWindow().hide();
+
+    }
 }

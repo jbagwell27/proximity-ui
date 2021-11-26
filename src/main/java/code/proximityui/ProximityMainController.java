@@ -1,10 +1,7 @@
 package code.proximityui;
 
-import code.proximityui.data.Card;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -19,7 +16,6 @@ import org.controlsfx.control.SearchableComboBox;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ProximityMainController implements Initializable {
@@ -29,28 +25,28 @@ public class ProximityMainController implements Initializable {
     public ListView cardSelectedListView;
     public SearchableComboBox cardAvailableComboBox;
 
-    private ArrayList<String> cardAvailableNames;
-    private ArrayList<Card> cardSelectedArrayList;
+    private ProximityModel model;
 
 
     /***
      * Fills the ComboBox List with all of the cards. Preferably pulled from mtgjson, or some other database of card names.
      */
     private void fillCardAvailableComboBox() {
-        if (!cardAvailableNames.isEmpty() && !cardAvailableNames.equals(null)) {
-            cardAvailableComboBox.getItems().addAll(cardAvailableNames);
+
+        if (!model.getCardAvailableNames().isEmpty() && model.getCardAvailableNames() != null) {
+            cardAvailableComboBox.getItems().addAll(model.getCardAvailableNames());
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        cardAvailableNames = new ArrayList<>();
-        cardSelectedArrayList = new ArrayList<>();
-        cardAvailableNames.add("Sol Ring");
-        cardAvailableNames.add("Avacyn, Angel of Hope");
-        cardAvailableNames.add("Forest");
-        cardAvailableNames.add("Mana Crypt");
+        model = new ProximityModel();
+
+        model.getCardAvailableNames().add("Sol Ring");
+        model.getCardAvailableNames().add("Avacyn, Angel of Hope");
+        model.getCardAvailableNames().add("Forest");
+        model.getCardAvailableNames().add("Mana Crypt");
         fillCardAvailableComboBox();
         setGridLayout();
         addCardSelectionChangedListener();
@@ -73,15 +69,18 @@ public class ProximityMainController implements Initializable {
 
     private void addCardSelectionChangedListener() {
 
-        cardSelectedListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+        cardSelectedListView.getSelectionModel().getSelectedIndices().addListener(new ListChangeListener() {
             @Override
-            public void changed(ObservableValue observableValue, Object o, Object t1) {
+            public void onChanged(Change change) {
 
                 if (cardSelectedListView.getSelectionModel().getSelectedItem() != null) {
 
-                    int index = cardSelectedListView.getSelectionModel().getSelectedIndex();
+                    System.out.println("Selected ListView Index: " + cardSelectedListView.getSelectionModel().getSelectedIndex());
+                    model.setCurrentCard(cardSelectedListView.getSelectionModel().getSelectedIndex());
+                    System.out.println("Current Card Array Index: " + model.getCardSelectedArrayList().indexOf(model.getCurrentCard()));
 
-                    cardSelectedParameters.setText(cardSelectedArrayList.get(index).getName());
+
+                    cardSelectedParameters.setText(model.getCurrentCard().getParameters().toString());
                 }
             }
         });
@@ -94,9 +93,8 @@ public class ProximityMainController implements Initializable {
     public void onAddCardButtonClick(ActionEvent actionEvent) {
         String selectedCardName = cardAvailableComboBox.getSelectionModel().getSelectedItem().toString();
 
-        cardSelectedListView.getItems().add(selectedCardName);
-        cardSelectedArrayList.add(new Card(selectedCardName));
-
+        selectedCardListAdd(selectedCardName);
+        cardSelectedListView.refresh();
     }
 
     /***
@@ -104,11 +102,10 @@ public class ProximityMainController implements Initializable {
      * @param actionEvent
      */
     public void removeSelectedCard(ActionEvent actionEvent) {
-        if (cardSelectedListView.getSelectionModel().getSelectedItem() != null || cardSelectedArrayList.size() > 0) {
+        if (cardSelectedListView.getSelectionModel().getSelectedItem() != null || model.getCardSelectedArrayList().size() > 0) {
             int index = cardSelectedListView.getSelectionModel().getSelectedIndex();
             System.out.println(String.format("Index %s", index));
-            cardSelectedListView.getItems().remove(index);
-            cardSelectedArrayList.remove(index);
+            selectedCardListRemove(index);
         }
     }
 
@@ -125,39 +122,33 @@ public class ProximityMainController implements Initializable {
                     Parent root = paramViewLoader.load();
 
                     ParametersController paramController = paramViewLoader.getController();
-                    Card currentCard = cardSelectedArrayList.get(cardSelectedListView.getSelectionModel().getSelectedIndex());
-                    paramController.setCardInformation(currentCard);
+                    paramController.setModel(model);
                     Stage stage = new Stage();
                     stage.setScene(new Scene(root));
-                    stage.setTitle(currentCard.getName());
-                    stage.show();
+                    stage.setTitle(model.getCurrentCard().getName());
+                    stage.showAndWait();
+
+                    model = paramController.getModel();
+                    cardSelectedParameters.setText(model.getCurrentCard().getParameters().toString());
+
+
                 } catch (IOException e) {
                     System.out.println("IO Exception was thrown when launching parameters window");
                     e.printStackTrace();
                 }
-
-
-//                String selectedCard = cardSelectedListView.getSelectionModel().getSelectedItem().toString();
-//                System.out.println(selectedCard);
-//                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//                alert.setTitle("Parameters");
-//                alert.setHeaderText(String.format("Parameters for %s", selectedCard));
-//                alert.setContentText("This is where parameters will go. Checkboxes, Dropdowns, free form text fields");
-//                alert.showAndWait();
             }
         }
-
-
     }
 
+    private void selectedCardListAdd(String cardName) {
+        cardSelectedListView.getItems().add(cardName);
+        System.out.println("Card ListView: " + cardSelectedListView.getItems().size());
+        model.addCardSelectedItem(cardName);
+        System.out.println("Card Array: " + model.getCardSelectedArrayList().size());
+    }
 
-//    @FXML
-//    private Label welcomeText;
-//
-//    @FXML
-//    protected void onHelloButtonClick() {
-//        welcomeText.setText("Welcome to JavaFX Application!");
-//    }
-
-
+    private void selectedCardListRemove(int index) {
+        cardSelectedListView.getItems().remove(index);
+        model.getCardSelectedArrayList().remove(index);
+    }
 }
