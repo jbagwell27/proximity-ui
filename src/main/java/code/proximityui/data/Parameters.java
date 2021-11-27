@@ -4,27 +4,23 @@ public class Parameters {
 
     private boolean use_official_art;
     private boolean reminder_text;
-    private int threads;
-    private String border;
     private boolean artist_outline;
     private boolean copyright;
+    private cardBorder border;
+
+    //global only variables
+    private boolean debug;
+    private int threads;
+
 
     public Parameters() {
         use_official_art = false;
         reminder_text = false;
-        threads = 10;
-        border = "black";
         artist_outline = false;
         copyright = true;
-    }
-
-    public Parameters(boolean use_official_art, boolean reminder_text, int threads, String border, boolean artist_outline, boolean copyright) {
-        this.use_official_art = use_official_art;
-        this.reminder_text = reminder_text;
-        this.threads = threads;
-        this.border = border;
-        this.artist_outline = artist_outline;
-        this.copyright = copyright;
+        border = cardBorder.black;
+        threads = 10;
+        debug = false;
     }
 
     public boolean isUse_official_art() {
@@ -43,7 +39,6 @@ public class Parameters {
         this.reminder_text = reminder_text;
     }
 
-
     public int getThreads() {
         return threads;
     }
@@ -52,11 +47,11 @@ public class Parameters {
         this.threads = threads;
     }
 
-    public String getBorder() {
+    public cardBorder getBorder() {
         return border;
     }
 
-    public void setBorder(String border) {
+    public void setBorder(cardBorder border) {
         this.border = border;
     }
 
@@ -76,13 +71,31 @@ public class Parameters {
         this.copyright = copyright;
     }
 
+    public boolean isDebug() {
+        return debug;
+    }
+
+    public void setDebug(boolean debug) {
+        this.debug = debug;
+    }
+
     @Override
     public String toString() {
-        return  "--use_official_art=" + use_official_art +
+        String result = "--use_official_art=" + use_official_art +
                 " --reminder_text=" + reminder_text +
-                " --threads=" + threads +
-                " --border=" + border +
-                " --artist_outline=" + artist_outline +
+                " --border=" + border.toString() +
+//                " --artist_outline=" + artist_outline +
                 " --copyright=" + copyright;
+        if (debug) {
+            result += " --debug=" + debug;
+        }
+        if (threads != 10) {
+            result += " --threads=" + threads;
+        }
+        return result;
     }
+
+    private enum cardBorder {black, none}
+
+
 }

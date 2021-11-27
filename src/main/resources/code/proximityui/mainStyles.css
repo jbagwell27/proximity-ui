@@ -3,19 +3,36 @@
     src: url('file:src/main/resources/code/proximityui/Beleren2016-Bold.ttf');
 }
 
-#cardSelectedParameters {
+#cardSelectedParamsText {
     -fx-background-insets: 0;
     -fx-background-color: transparent;
-}
-#cardSelectedParameters .content {
+    -fx-font-family: monospace
+    }
+#cardSelectedParamsText .content {
     -fx-background-color: transparent;
 }
 
-#cardSelectedParameters:focused .content{
+#cardSelectedParamsText:focused .content{
 -fx-background-color: transparent;
 }
 
-#cardSelectedParameters:focused {
+#cardSelectedParamsText:focused {
+ -fx-highlight-fill: #7ecfff;
+}
+#globalParamsText {
+    -fx-background-insets: 0;
+    -fx-background-color: transparent;
+    -fx-font-family: monospace
+}
+#globalParamsText .content {
+    -fx-background-color: transparent;
+}
+
+#globalParamsText:focused .content{
+-fx-background-color: transparent;
+}
+
+#globalParamsText:focused {
  -fx-highlight-fill: #7ecfff;
 }
 

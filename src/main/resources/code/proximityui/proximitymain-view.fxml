@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import org.controlsfx.control.SearchableComboBox?>
 <?import java.net.URL?>
-<VBox xmlns:fx="http://javafx.com/fxml" spacing="5.0"
+<VBox xmlns:fx="http://javafx.com/fxml/1" spacing="5.0" xmlns="http://javafx.com/javafx/11.0.2"
       fx:controller="code.proximityui.ProximityMainController">
     <stylesheets>
         <URL value="@mainStyles.css"/>
@@ -19,45 +19,55 @@
     <!--        <Button text="Hello!" onAction="#onHelloButtonClick"-->
     <!--                GridPane.columnIndex="0" GridPane.rowIndex="1"/>-->
 
-    <GridPane
-            fx:id="rootGrid">
-        <Label text="Card List"
-               GridPane.columnIndex="0" GridPane.rowIndex="0">
+    <GridPane fx:id="rootGrid">
+        <Label text="Card List" GridPane.columnIndex="0" GridPane.rowIndex="0">
         </Label>
 
+        <VBox
+                spacing="5"
+                GridPane.columnIndex="0" GridPane.rowIndex="1">
+            <SearchableComboBox
+                    fx:id="cardAvailableComboBox"/>
+            <Button
+                    text="Add"
+                    onAction="#onAddCardButtonClick"/>
 
-        <SearchableComboBox
-                fx:id="cardAvailableComboBox"
-                GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-        <Button
-                text="Add"
-                GridPane.columnIndex="0" GridPane.rowIndex="2"
-                onAction="#onAddCardButtonClick"
-                GridPane.valignment="TOP"/>
-
+        </VBox>
         <Label
                 text="Cards Selected"
                 GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-        <Button text="-"
+        <Button
+                text="-"
+                onAction="#removeSelectedCard"
                 GridPane.columnIndex="1" GridPane.rowIndex="0"
-                GridPane.halignment="RIGHT"
-                onAction="#removeSelectedCard">
-        </Button>
+                GridPane.halignment="RIGHT"/>
         <ListView
                 fx:id="cardSelectedListView"
                 GridPane.columnIndex="1" GridPane.rowIndex="1"
-                GridPane.rowSpan="2"
+                GridPane.rowSpan="3"
                 onMousePressed="#onCardSelectedDoubleClick"/>
-
+        <Label
+                text="Selected Card Parameters"
+                GridPane.columnIndex="2" GridPane.rowIndex="0"/>
         <TextArea
-                fx:id="cardSelectedParameters"
-                wrapText="true"
-                minWidth="100"
-                GridPane.columnIndex="2" GridPane.rowIndex="1"
-                GridPane.rowSpan="2"
-                GridPane.valignment="TOP"
+                fx:id="cardSelectedParamsText"
                 text="Hello from Text Area"
-                editable="false"/>
+                editable="false"
+                minWidth="100"
+                wrapText="true"
+                GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+
+        <Label
+                text="Global Parameters"
+                GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+        <TextArea
+                fx:id="globalParamsText"
+                text="Hello from Global Text Area"
+                editable="false"
+                minWidth="100"
+                wrapText="true"
+                GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+
 
     </GridPane>
 

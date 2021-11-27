@@ -20,10 +20,11 @@ import java.util.ResourceBundle;
 
 public class ProximityMainController implements Initializable {
 
-    public TextArea cardSelectedParameters;
+    public TextArea cardSelectedParamsText;
     public GridPane rootGrid;
     public ListView cardSelectedListView;
     public SearchableComboBox cardAvailableComboBox;
+    public TextArea globalParamsText;
 
     private ProximityModel model;
 
@@ -65,6 +66,7 @@ public class ProximityMainController implements Initializable {
 
         rootGrid.setHgap(20);
         rootGrid.setVgap(10);
+
     }
 
     private void addCardSelectionChangedListener() {
@@ -80,7 +82,7 @@ public class ProximityMainController implements Initializable {
                     System.out.println("Current Card Array Index: " + model.getCardSelectedArrayList().indexOf(model.getCurrentCard()));
 
 
-                    cardSelectedParameters.setText(model.getCurrentCard().getParameters().toString());
+                    cardSelectedParamsText.setText(model.getCurrentCard().getParameters().toString());
                 }
             }
         });
@@ -121,7 +123,7 @@ public class ProximityMainController implements Initializable {
                 try {
                     Parent root = paramViewLoader.load();
 
-                    ParametersController paramController = paramViewLoader.getController();
+                    CardParametersController paramController = paramViewLoader.getController();
                     paramController.setModel(model);
                     Stage stage = new Stage();
                     stage.setScene(new Scene(root));
@@ -129,7 +131,7 @@ public class ProximityMainController implements Initializable {
                     stage.showAndWait();
 
                     model = paramController.getModel();
-                    cardSelectedParameters.setText(model.getCurrentCard().getParameters().toString());
+                    cardSelectedParamsText.setText(model.getCurrentCard().getParameters().toString());
 
 
                 } catch (IOException e) {

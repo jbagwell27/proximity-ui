@@ -1,7 +1,5 @@
 package code.proximityui;
 
-import code.proximityui.data.Card;
-import code.proximityui.data.Parameters;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -11,7 +9,7 @@ import javafx.scene.layout.GridPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ParametersController implements Initializable {
+public class CardParametersController implements Initializable {
 
     public Label cardname;
     public GridPane rootParamGrid;
